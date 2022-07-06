@@ -7,11 +7,15 @@ export default {
     const region = request.headers.get("fly-region") || "??";
     const url = new URL(request.url);
     console.log(request.headers.get("fly-client-ip"), request.url);
-    return new Response(`
+    return new Response(
+      `
       <html>
         <main>
-          <img src="https://astro.build/assets/press/full-logo-light.svg" style="height: 48px;" alt="astro logo" />
-          <h1>Theo's Crappy Benchmark (Astro On Vercel Edge)</h1>
+          <img src="https://bun.sh/logo@2x.png" style="height: 48px;" alt="bun logo" />
+          <h1>Theo's Crappy Benchmark (Bun On Fly.io in region ${region})</h1>
+          <h4>Rendered at: ${new Date().toISOString()}</h4>
+
+
           <h2><span>Full request to render time (according to Theo): <span id="overrideme" />ms</span></h2>
           <script>
             const currentTime = new Date();
@@ -26,6 +30,12 @@ export default {
             console.table(times);
           </script>
         </main>
-      </html>`);
+      </html>`,
+      {
+        headers: {
+          "Content-Type": "text/html",
+        },
+      }
+    );
   },
 };
