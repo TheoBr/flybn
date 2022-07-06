@@ -1,21 +1,23 @@
-app = "bun-fun"
+# fly.toml file generated for flybn on 2022-07-06T00:12:49-07:00
+
+app = "flybn"
+
 [[services]]
-internal_port = 3000
-protocol      = "tcp"
-
+  internal_port = 3000
+  protocol = "tcp"
   [services.concurrency]
-  hard_limit = 250
-  soft_limit = 100
-  type       = "requests"
+    hard_limit = 250
+    soft_limit = 100
+    type = "requests"
 
   [[services.ports]]
-  handlers = [ "http" ]
-  port     = "80"
+    handlers = ["http"]
+    port = "80"
 
   [[services.ports]]
-  handlers = [ "tls", "http" ]
-  port     = "443"
+    handlers = ["tls", "http"]
+    port = "443"
 
   [[services.tcp_checks]]
-  interval = 10000
-  timeout  = 2000
+    interval = 10000
+    timeout = 2000
